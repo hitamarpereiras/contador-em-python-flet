@@ -34,17 +34,17 @@ def main(page: ft.Page):
         except Exception as er:
             return er
     
-    ################# 30 min #################
-    def meia_hora(e):
-        m = 29
+    ################# 15 min #################
+    def quinze_min(e):
+        m = 14
         while True:
             for s in range(59, -1, -1):
-                text_c.value = f"{m}:{s}"
-                if s == 0:
+                text_c.value = f"{str(m).zfill(2)}:{str(s).zfill(2)}"
+                if s == 00:
                     m = m -1
                 page.update()
                 sleep(1)
-            if m == 0:
+            if m == 00:
                 text_c.value = 'Fim!'
                 frase = random.choice(jdados['frase'])
                 h2.value= f'{frase}'
@@ -54,14 +54,116 @@ def main(page: ft.Page):
         block.visible = True
         page.update()    
 
+    ################# 30 min #################
+    def meia_hora(e):
+        m = 29
+        while True:
+            for s in range(59, -1, -1):
+                text_c.value = f"{str(m).zfill(2)}:{str(s).zfill(2)}"
+                if s == 00:
+                    m = m -1
+                page.update()
+                sleep(1)
+            if m == 00:
+                text_c.value = 'Fim!'
+                frase = random.choice(jdados['frase'])
+                h2.value= f'{frase}'
+                page.update()
+                alarme(e)
+                break
+        block.visible = True
+        page.update()    
+
+    ################# 1 hora #################
+    def uma_hora(e):
+        h = 1
+        m = 59
+        while h:
+            for s in range(59, -1, -1):
+                text_c.value = f"{str(h).zfill(2)}:{str(m).zfill(2)}:{str(s).zfill(2)}"
+                if s == 00:
+                    m = m -1
+                page.update()
+                sleep(1)
+            if m == 00:
+                h = 0
+                if h == 0:
+                    text_c.value = 'Fim!'
+                    frase = random.choice(jdados['frase'])
+                    h2.value= f'{frase}'
+                    page.update()
+                    alarme(e)
+                    break
+        block.visible = True
+        page.update()    
+
+    ################# 2 horas #################
+    def duas_horas(e):
+        h = 2
+        m = 59
+        while h:
+            for s in range(5, -1, -1):
+                text_c.value = f"{str(h).zfill(2)}:{str(m).zfill(2)}:{str(s).zfill(2)}"
+                if s == 00:
+                    m = m -1
+                    if m == 00:
+                        h = h -1
+                        m = 59
+                        if h == 00:
+                            text_c.value = 'Fim!'
+                            frase = random.choice(jdados['frase'])
+                            h2.value= f'{frase}'
+                            page.update()
+                            alarme(e)
+                            block.visible = True
+                            page.update()
+                            break
+
+                page.update()
+                sleep(1)
+
+    ################# 3 horas #################
+    def tres_horas(e):
+        h = 3
+        m = 59
+        while h:
+            for s in range(5, -1, -1):
+                text_c.value = f"{str(h).zfill(2)}:{str(m).zfill(2)}:{str(s).zfill(2)}"
+                if s == 00:
+                    m = m -1
+                    if m == 00:
+                        h = h -1
+                        m = 59
+                        if h == 00:
+                            text_c.value = 'Fim!'
+                            frase = random.choice(jdados['frase'])
+                            h2.value= f'{frase}'
+                            page.update()
+                            alarme(e)
+                            block.visible = True
+                            page.update()
+                            break
+
+                page.update()
+                sleep(1)
+
     ################# CONTADOR #################
     def contador(e):
         block.visible = False
         text_c.size = 60
 
-        if block.value == "30 min":
+        if block.value == "15 min":
+            quinze_min(e)
+        elif block.value == "30 min":
             meia_hora(e)
-        
+        elif block.value == "1 hora":
+            uma_hora(e)
+        elif block.value == "2 horas":
+            duas_horas(e)
+        elif block.value == "3 horas":
+            tres_horas(e)
+
+    ################# INPUTS E BOTOES #################    
     btn = ft.ElevatedButton(
         text= 'Start',
         bgcolor= '#f4f1ed',
@@ -78,6 +180,7 @@ def main(page: ft.Page):
         bgcolor= ft.colors.GREY_300,
         focused_border_color= 'transparent',
         options=[
+            ft.dropdown.Option("15 min"),
             ft.dropdown.Option("30 min"),
             ft.dropdown.Option("1 hora"),
             ft.dropdown.Option("2 horas"),
@@ -87,7 +190,7 @@ def main(page: ft.Page):
 
     h2 = ft.Text(
         value= f'{random.choice(jdados['frase'])}',
-        size=16,
+        size=17,
         text_align= 'center',
         color= '#10110d',
         font_family= 'Hour_font'
@@ -95,7 +198,7 @@ def main(page: ft.Page):
 
     text_c = ft.Text(
         value= '',
-        size=24,
+        size=18,
         text_align= 'center',
         color= '#10110d',
         font_family= 'Hour_font',
