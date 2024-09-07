@@ -12,6 +12,7 @@ def main(page: ft.Page):
     page.window_max_height= 280
     page.window_width= 420
     page.window_max_width= 420
+    page.theme_mode= ft.ThemeMode.LIGHT
     page.title= 'Contador'
     page.bgcolor= '#999ea0'
     page.padding= 0
@@ -32,6 +33,20 @@ def main(page: ft.Page):
             pygame.mixer_music.play()
         except Exception as er:
             return er
+    
+    ################# 30 min #################
+    def meia_hora(e):
+        block.visible = False
+        text_c.size = 60
+        for m in range(29, -1, -1):
+            text_c.value = f"{m}"
+            if m == 0:
+                text_c.value = 'Fim!'
+                frase = random.choice(jdados['frase'])
+                h2.value= f'{frase}'
+            page.update()
+            sleep(1)
+        alarme(e)
 
     ################# CONTADOR #################
     def contador(e):
@@ -67,21 +82,24 @@ def main(page: ft.Page):
     btn = ft.ElevatedButton(
         text= 'Start',
         bgcolor= '#f4f1ed',
-        on_click= contador,
+        on_click= meia_hora,
         color= '#10110d'
     )
 
-    block = ft.TextField(
-        width= 60,
-        height= 50,
-        border_color= 'transparent',
-        border_width= 3,
-        border_radius= 24,
-        visible= True,
-        bgcolor= '#999ea0a3',
-        cursor_color= '#10110d',
-        color= '#10110d',
-        autofocus= True
+    block = ft.Dropdown(
+        hint_text= 'Chose!',
+        width= 95,
+        height= 60,
+        border= 'transparent',
+        border_radius= 16,
+        bgcolor= ft.colors.GREY_300,
+        focused_border_color= 'transparent',
+        options=[
+            ft.dropdown.Option("30 min"),
+            ft.dropdown.Option("1 hora"),
+            ft.dropdown.Option("2 horas"),
+            ft.dropdown.Option("3 horas"),
+        ]
     )
 
     h2 = ft.Text(
