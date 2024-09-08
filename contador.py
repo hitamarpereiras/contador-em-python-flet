@@ -102,7 +102,7 @@ def main(page: ft.Page):
         h = 2
         m = 59
         while h:
-            for s in range(5, -1, -1):
+            for s in range(59, -1, -1):
                 text_c.value = f"{str(h).zfill(2)}:{str(m).zfill(2)}:{str(s).zfill(2)}"
                 if s == 00:
                     m = m -1
@@ -127,7 +127,7 @@ def main(page: ft.Page):
         h = 3
         m = 59
         while h:
-            for s in range(5, -1, -1):
+            for s in range(59, -1, -1):
                 text_c.value = f"{str(h).zfill(2)}:{str(m).zfill(2)}:{str(s).zfill(2)}"
                 if s == 00:
                     m = m -1
@@ -219,7 +219,7 @@ def main(page: ft.Page):
                     text_c, 
                     btn,
                     ],alignment=ft.MainAxisAlignment.SPACE_AROUND),
-                image_src="./img/bg2.gif",  # Substitua pelo caminho da sua imagem
+                image_src="./img/bg2.gif",  
                 image_fit=ft.ImageFit.COVER,  # Ajusta a imagem para cobrir o container
                 width=420,
                 height=243,
