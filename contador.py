@@ -76,30 +76,27 @@ def main(page: ft.Page):
 
     ################# 1 hora #################
     def uma_hora(e):
-        h = 1
         m = 59
-        while h:
+        while m:
             for s in range(59, -1, -1):
-                text_c.value = f"{str(h).zfill(2)}:{str(m).zfill(2)}:{str(s).zfill(2)}"
+                text_c.value = f"{str(m).zfill(2)}:{str(s).zfill(2)}"
                 if s == 00:
                     m = m -1
                 page.update()
                 sleep(1)
             if m == 00:
-                h = 0
-                if h == 0:
-                    text_c.value = 'Fim!'
-                    frase = random.choice(jdados['frase'])
-                    h2.value= f'{frase}'
-                    page.update()
-                    alarme(e)
-                    break
+                text_c.value = 'Fim!'
+                frase = random.choice(jdados['frase'])
+                h2.value= f'{frase}'
+                page.update()
+                alarme(e)
+                break
         block.visible = True
         page.update()    
 
     ################# 2 horas #################
     def duas_horas(e):
-        h = 2
+        h = 1
         m = 59
         while h:
             for s in range(59, -1, -1):
@@ -124,7 +121,7 @@ def main(page: ft.Page):
 
     ################# 3 horas #################
     def tres_horas(e):
-        h = 3
+        h = 2
         m = 59
         while h:
             for s in range(59, -1, -1):
