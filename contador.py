@@ -36,6 +36,7 @@ def main(page: ft.Page):
     
     ################# 15 min #################
     def quinze_min(e):
+        btn.visible= False
         m = 14
         while True:
             for s in range(59, -1, -1):
@@ -51,11 +52,15 @@ def main(page: ft.Page):
                 page.update()
                 alarme(e)
                 break
+        sleep(22)
+        text_c.value = ''
         block.visible = True
+        btn.visible= True
         page.update()    
 
     ################# 30 min #################
     def meia_hora(e):
+        btn.visible= False
         m = 29
         while True:
             for s in range(59, -1, -1):
@@ -71,11 +76,15 @@ def main(page: ft.Page):
                 page.update()
                 alarme(e)
                 break
+        sleep(22)
+        text_c.value = ''
         block.visible = True
+        btn.visible= True
         page.update()    
 
     ################# 1 hora #################
     def uma_hora(e):
+        btn.visible= False
         m = 59
         while m:
             for s in range(59, -1, -1):
@@ -91,11 +100,15 @@ def main(page: ft.Page):
                 page.update()
                 alarme(e)
                 break
+        sleep(22)
+        text_c.value = ''
         block.visible = True
+        btn.visible= True
         page.update()    
 
     ################# 2 horas #################
     def duas_horas(e):
+        btn.visible= False
         h = 1
         m = 59
         while h:
@@ -105,22 +118,14 @@ def main(page: ft.Page):
                     m = m -1
                     if m == 00:
                         h = h -1
-                        m = 59
-                        if h == 00:
-                            text_c.value = 'Fim!'
-                            frase = random.choice(jdados['frase'])
-                            h2.value= f'{frase}'
-                            page.update()
-                            alarme(e)
-                            block.visible = True
-                            page.update()
-                            break
+                        uma_hora(e)
 
                 page.update()
                 sleep(1)
 
     ################# 3 horas #################
     def tres_horas(e):
+        btn.visible= False
         h = 2
         m = 59
         while h:
@@ -130,16 +135,9 @@ def main(page: ft.Page):
                     m = m -1
                     if m == 00:
                         h = h -1
-                        m = 59
+                        m = 2
                         if h == 00:
-                            text_c.value = 'Fim!'
-                            frase = random.choice(jdados['frase'])
-                            h2.value= f'{frase}'
-                            page.update()
-                            alarme(e)
-                            block.visible = True
-                            page.update()
-                            break
+                           uma_hora(e)
 
                 page.update()
                 sleep(1)
@@ -165,7 +163,8 @@ def main(page: ft.Page):
         text= 'Start',
         bgcolor= '#f4f1ed',
         on_click= contador,
-        color= '#10110d'
+        color= '#10110d',
+        visible= True
     )
 
     block = ft.Dropdown(
